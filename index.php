@@ -3,11 +3,23 @@
 
 <center>
 <h1>PHP OCR Test</h1>
-<h3>Accepts .JPG and .PNG files only, for best results, use images with normal orientation (no tilting, no skewering) and texts that don't break form</h3>
-<form action="upload.php" method="POST" enctype="multipart/form-data">
-<input type="file" name="image" />
-<input type="submit"/>
-</form>
+
+<!--    for creating upload button-->    
+<form class="box" method="POST" action="upload.php" enctype="multipart/form-data">
+  <div class="box__input">
+    <input class="box__file" type="file" name="image" id="file" />
+    <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+    <button class="box__button" type="submit">Upload</button>
+  </div>
+<!--    for displaying load animation-->
+  <div class="box__uploading">Uploading&hellip;</div>
+<!--    for displaying error if wrong file submitted-->
+  <div class="box__error">Error! <span></span>.</div> 
+</form>    
+ 
+<h3>Click the upload button, or choose an image from your hard drive and drag it on the page to upload to the OCR. Our program is designed for instant Chinese text digital conversion into a document ready solution. </h3>
+<h4>Accepts .JPG and .PNG files only, one at a time. For best results, use image with normal orientation (no tilting, no skewering) and texts that don't break form.</h4>
+
 </center>
 
 </body>
