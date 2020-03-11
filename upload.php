@@ -1,22 +1,19 @@
 <?php
-    //if the file in question contains a name and file type...
-if(isset($_FILES['image'])){
-    $file_name = $_FILES['image']['name'];
-    $file_tmp =$_FILES['image']['tmp_name'];
-var_dump($_FILES);
-    //...declare successful upload, display image in 50% its width...   
-    move_uploaded_file($file_tmp,"images/".$file_name);
-    echo "<h3>Image Upload Success</h3>";
-    echo '<img src="images/'.$file_name.'" style="width:50%">';
-
-    // execute tesseract OCR program, saves into OCR/images directory, output a .txt file of transcribed text 
-
-    echo "<br><h3>OCR after reading</h3><br><pre>";
-    
-    //text output with consideration of broken file/missing path
-    $myfile = fopen("out.txt", "r") or die("Unable to open file!");
-    echo fread($myfile,filesize("out.txt"));
-    fclose($myfile);
-    echo "</pre>";
-    }
+include('config.php');
+if (!isset($_FILES['image']['tmp_name'])) {
+ echo "";
+ }else{
+ $file=$_FILES['image']['tmp_name'];
+ $image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
+ $image_name= addslashes($_FILES['image']['name']);
+   
+   move_uploaded_file($_FILES["image"]["tmp_name"],"photos/" . $_FILES["image"]["name"]);
+   
+   $location="photos/" . $_FILES["image"]["name"];
+   $caption=$_POST['caption'];
+   
+   $save=mysql_query("INSERT INTO photos (location, caption) VALUES ('$location','$caption')");
+   header("location: index.php");
+   exit();     
+ }
 ?>
